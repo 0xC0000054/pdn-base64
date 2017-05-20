@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EA864266-F3AA-45FD-A250-FFA7AB215E81}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Base64FileType</RootNamespace>
+    <AssemblyName>Base64FileType</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>436</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>436</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PaintDotNet.Base">
+      <HintPath>C:\Dev_projects\PSFilterPdn\References\PaintDotNet.Base.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.Core">
+      <HintPath>C:\Dev_projects\PSFilterPdn\References\PaintDotNet.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PaintDotNet.Data">
+      <HintPath>C:\Dev_projects\PSFilterPdn\References\PaintDotNet.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base64FileType.cs" />
+    <Compile Include="Base64FileTypeFactory.cs" />
+    <Compile Include="Base64SaveConfigToken.cs" />
+    <Compile Include="Base64SaveConfigWidget.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Base64SaveConfigWidget.Designer.cs">
+      <DependentUpon>Base64SaveConfigWidget.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CssRepeatType.cs" />
+    <Compile Include="CssTokenData.cs" />
+    <Compile Include="FileFormat.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="PaintDotNet\EtchedLine.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PaintDotNet\HeaderLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PaintDotNet\UI.cs" />
+    <Compile Include="PaintDotNet\VisualStyleClass.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UriDataType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Base64SaveConfigWidget.resx">
+      <DependentUpon>Base64SaveConfigWidget.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>Copy "$(TargetPath)" "D:\Program Files\Paint.NET\FileTypes" /y
+if "$(ConfigurationName)" == "Debug" copy "$(TargetDir)$(TargetName).pdb" "D:\Program Files\Paint.NET\FileTypes" /y</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
