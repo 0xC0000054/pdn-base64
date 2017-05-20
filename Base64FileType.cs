@@ -355,7 +355,7 @@ namespace Base64FileTypePlugin
                     gdipFormat = ImageFormat.Png;
                     break;
                 default:
-                    throw new InvalidEnumArgumentException();
+                    throw new InvalidEnumArgumentException("configToken.ImageType", (int)configToken.ImageType, typeof(FileFormat));
             }
 
             SavableBitDepths bitDepth = ChooseBestBitDepth(input, scratchSurface, gdipFormat);
@@ -447,7 +447,7 @@ namespace Base64FileTypePlugin
                         uriEncodedText = configToken.CssData.ToString(codecInfo.MimeType, base64);
                         break;
                     default:
-                        throw new InvalidEnumArgumentException();
+                        throw new InvalidEnumArgumentException("configToken.DataType", (int)configToken.DataType, typeof(UriDataType));
                 }
 
                 encodedBytes = Encoding.UTF8.GetBytes(uriEncodedText);
