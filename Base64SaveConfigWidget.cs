@@ -10,6 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Drawing;
 using System.ComponentModel;
 using System.Windows.Forms;
 using PaintDotNet;
@@ -31,6 +32,46 @@ namespace Base64FileTypePlugin
             InitializeComponent();
             this.cssData = new CssTokenData();
             this.suppressTokenUpdateCounter = 0;
+        }
+
+        protected override void OnBackColorChanged(EventArgs e)
+        {
+            base.OnBackColorChanged(e);
+
+            UpdateControlBackColor(this, BackColor);
+        }
+
+        protected override void OnForeColorChanged(EventArgs e)
+        {
+            base.OnForeColorChanged(e);
+
+            UpdateControlForeColor(this, ForeColor);
+        }
+
+        private static void UpdateControlBackColor(Control parent, Color backColor)
+        {
+            foreach (Control item in parent.Controls)
+            {
+                item.BackColor = backColor;
+
+                if (item.HasChildren)
+                {
+                    UpdateControlBackColor(item, backColor);
+                }
+            }
+        }
+
+        private static void UpdateControlForeColor(Control parent, Color foreColor)
+        {
+            foreach (Control item in parent.Controls)
+            {
+                item.ForeColor = foreColor;
+
+                if (item.HasChildren)
+                {
+                    UpdateControlForeColor(item, foreColor);
+                }
+            }
         }
 
         private void PushSuppressTokenUpdate()
