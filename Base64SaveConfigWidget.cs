@@ -1,7 +1,7 @@
 ﻿/////////////////////////////////////////////////////////////////////////////////
 //
 // Base64 FileType Plugin for Paint.NET
-// 
+//
 // This software is provided under the MIT License:
 //   Copyright (c) 2013-2017 Nicholas Hayes
 //
@@ -89,7 +89,7 @@ namespace Base64FileTypePlugin
 
                 if (configToken.CssData != null)
                 {
-                    this.cssData = configToken.CssData; 
+                    this.cssData = configToken.CssData;
                 }
 
                 this.cssClassNameTxt.Text = cssData.className;
@@ -149,7 +149,7 @@ namespace Base64FileTypePlugin
 
         private void cssBackColorTxt_KeyDown(object sender, KeyEventArgs e)
         {
-            Keys key = e.KeyCode;  
+            Keys key = e.KeyCode;
             if (IsHexadecimalChar(key, e.Shift) || key == Keys.Delete || key == Keys.Back || key == Keys.Left || key == Keys.Right)
             {
                 e.Handled = true;
@@ -228,7 +228,7 @@ namespace Base64FileTypePlugin
                         base64 = string.Format(
                             CultureInfo.InvariantCulture,
                             "<img src={0} alt=\"{1}\" />",
-                            Base64ContentType, 
+                            Base64ContentType,
                             this.htmlAltText.Text.Trim());
                         break;
                     case UriDataType.Css:

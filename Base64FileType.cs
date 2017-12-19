@@ -1,7 +1,7 @@
 ﻿/////////////////////////////////////////////////////////////////////////////////
 //
 // Base64 FileType Plugin for Paint.NET
-// 
+//
 // This software is provided under the MIT License:
 //   Copyright (c) 2013-2017 Nicholas Hayes
 //
@@ -42,7 +42,7 @@ namespace Base64FileTypePlugin
         private static readonly string[] EndEncodings = new string[2] { "alt", ")" };
 
         private const string DataURIFormat = "data:image/{0};base64,";
-       
+
         private enum SavableBitDepths
         {
             Rgba32, // 2^24 colors, plus a full 8-bit alpha channel
@@ -377,7 +377,7 @@ namespace Base64FileTypePlugin
                     {
                         ColorBgra* ptr = scratchSurface.GetRowAddressUnchecked(y);
                         ColorBgra* endPtr = ptr + scratchSurface.Width;
-                        
+
                         while (ptr < endPtr)
                         {
                             if (ptr->A < 128 && bitDepth == SavableBitDepths.Rgba8)
@@ -390,7 +390,7 @@ namespace Base64FileTypePlugin
                             }
                             ptr++;
                         }
-                    } 
+                    }
                 }
             }
 
@@ -431,8 +431,8 @@ namespace Base64FileTypePlugin
 
                 base64 = Convert.ToBase64String(ms.GetBuffer(), options);
             }
-            
-            byte[] encodedBytes = null; 
+
+            byte[] encodedBytes = null;
 
             if (configToken.UriEncode)
             {
