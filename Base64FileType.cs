@@ -125,7 +125,15 @@ namespace Base64FileTypePlugin
             }
 
             EncoderParameters encodeOptions = new EncoderParameters(1);
-            encodeOptions.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.ColorDepth, colorDepth);
+            try
+            {
+                encodeOptions.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.ColorDepth, colorDepth);
+            }
+            catch (Exception)
+            {
+                encodeOptions.Dispose();
+                throw;
+            }
 
             return encodeOptions;
         }
