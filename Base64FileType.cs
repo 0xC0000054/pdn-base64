@@ -39,7 +39,7 @@ namespace Base64FileTypePlugin
         }
 
         private static readonly string[] ImageFormats = new string[2] { "bmp", "png" };
-        private static readonly string[] EndEncodings = new string[2] { "alt", ")" };
+        private static readonly string[] EndEncodings = new string[2] { "alt=\"", ")" };
 
         private const string DataURIFormat = "data:image/{0};base64,";
 
