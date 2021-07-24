@@ -3,7 +3,7 @@
 // Base64 FileType Plugin for Paint.NET
 //
 // This software is provided under the MIT License:
-//   Copyright (c) 2013-2018, 2020 Nicholas Hayes
+//   Copyright (c) 2013-2018, 2020, 2021 Nicholas Hayes
 //
 // See LICENSE.txt for complete licensing and attribution information.
 //
@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("null54")]
 [assembly: AssemblyProduct("Base64FileType")]
-[assembly: AssemblyCopyright("Copyright © 2020 Nicholas Hayes (aka null54)")]
+[assembly: AssemblyCopyright("Copyright © 2021 Nicholas Hayes (aka null54)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
