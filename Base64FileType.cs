@@ -75,6 +75,7 @@ namespace Base64FileTypePlugin
             {
                 string data = sr.ReadToEnd();
 
+                // The base 64 data can optionally be surrounded by single or double quotes.
                 bool isQuotedBase64String = false;
                 char quoteChar = '\0';
 
