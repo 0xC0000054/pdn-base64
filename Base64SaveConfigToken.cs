@@ -59,7 +59,13 @@ namespace Base64FileTypePlugin
             internal set;
         }
 
-        public Base64SaveConfigToken(FileFormat imageType, string base64, bool lineBreaks, bool uriEncode, UriDataType dataType, string altText, CssTokenData css)
+        public Base64SaveConfigToken(FileFormat imageType,
+                                     string base64,
+                                     bool lineBreaks,
+                                     bool uriEncode,
+                                     UriDataType dataType,
+                                     string altText,
+                                     CssTokenData css)
         {
             this.ImageType = imageType;
             this.Base64Format = base64;

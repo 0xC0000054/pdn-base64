@@ -191,7 +191,11 @@ namespace Base64FileTypePlugin
         private void cssBackColorTxt_KeyDown(object sender, KeyEventArgs e)
         {
             Keys key = e.KeyCode;
-            if (IsHexadecimalChar(key, e.Shift) || key == Keys.Delete || key == Keys.Back || key == Keys.Left || key == Keys.Right)
+            if (IsHexadecimalChar(key, e.Shift)
+                || key == Keys.Delete
+                || key == Keys.Back
+                || key == Keys.Left
+                || key == Keys.Right)
             {
                 e.Handled = true;
                 e.SuppressKeyPress = false;

@@ -34,7 +34,9 @@ namespace Base64FileTypePlugin
 {
     public sealed class Base64FileType : FileType
     {
-        public Base64FileType() : base("Base64", FileTypeFlags.SupportsSaving | FileTypeFlags.SupportsLoading, new string[] {".b64"})
+        public Base64FileType() : base("Base64",
+                                       FileTypeFlags.SupportsSaving | FileTypeFlags.SupportsLoading,
+                                       new string[] { ".b64" })
         {
         }
 
@@ -53,7 +55,13 @@ namespace Base64FileTypePlugin
 
         protected override SaveConfigToken OnCreateDefaultSaveConfigToken()
         {
-            return new Base64SaveConfigToken(FileFormat.Png, string.Empty, false, false, UriDataType.None, string.Empty, new CssTokenData());
+            return new Base64SaveConfigToken(FileFormat.Png,
+                                             string.Empty,
+                                             false,
+                                             false,
+                                             UriDataType.None,
+                                             string.Empty,
+                                             new CssTokenData());
         }
 
         public override SaveConfigWidget CreateSaveConfigWidget()
@@ -153,7 +161,8 @@ namespace Base64FileTypePlugin
             EncoderParameters encodeOptions = new EncoderParameters(1);
             try
             {
-                encodeOptions.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.ColorDepth, colorDepth);
+                encodeOptions.Param[0] = new EncoderParameter(System.Drawing.Imaging.Encoder.ColorDepth,
+                                                              colorDepth);
             }
             catch (Exception)
             {
@@ -208,10 +217,17 @@ namespace Base64FileTypePlugin
         {
             int stride = surface.Width * 3;
             int realStride = ((stride + 3) / 4) * 4; // round up to multiple of 4
-            return new Bitmap(surface.Width, surface.Height, realStride, PixelFormat.Format24bppRgb, new IntPtr(surface.Scan0.VoidStar));
+            return new Bitmap(surface.Width,
+                              surface.Height,
+                              realStride,
+                              PixelFormat.Format24bppRgb,
+                              new IntPtr(surface.Scan0.VoidStar));
         }
 
-        private static unsafe void Analyze(Surface scratchSurface, out bool allOpaque, out bool all0or255Alpha, out int uniqueColorCount)
+        private static unsafe void Analyze(Surface scratchSurface,
+                                           out bool allOpaque,
+                                           out bool all0or255Alpha,
+                                           out int uniqueColorCount)
         {
             allOpaque = true;
             all0or255Alpha = true;
@@ -274,7 +290,11 @@ namespace Base64FileTypePlugin
                     case SavableBitDepths.Rgb8:
                     case SavableBitDepths.Rgba8:
 
-                        using (Bitmap temp = Quantize(scratchSurface, 7, 256, bitDepth == SavableBitDepths.Rgba8, null))
+                        using (Bitmap temp = Quantize(scratchSurface,
+                                                      7,
+                                                      256,
+                                                      bitDepth == SavableBitDepths.Rgba8,
+                                                      null))
                         {
                             temp.Save(ms, format);
                         }
@@ -320,7 +340,8 @@ namespace Base64FileTypePlugin
             else
             {
                 long totalPixelSize = scratchSurface.Width * scratchSurface.Height;
-                if (allowedBitDepths.SetEquals(new SavableBitDepths[] { SavableBitDepths.Rgb8, SavableBitDepths.Rgb24 }) && totalPixelSize <= 65536)
+                if (allowedBitDepths.SetEquals(new SavableBitDepths[] { SavableBitDepths.Rgb8, SavableBitDepths.Rgb24 })
+                    && totalPixelSize <= 65536)
                 {
                     long rgb8Length;
                     long rgb24Length;
@@ -337,7 +358,8 @@ namespace Base64FileTypePlugin
 
                     bestBitDepth = rgb8Length <= rgb24Length ? SavableBitDepths.Rgb8 : SavableBitDepths.Rgb24;
                 }
-                else if (allowedBitDepths.SetEquals(new SavableBitDepths[] { SavableBitDepths.Rgba8, SavableBitDepths.Rgba32 }) && totalPixelSize <= 65536)
+                else if (allowedBitDepths.SetEquals(new SavableBitDepths[] { SavableBitDepths.Rgba8, SavableBitDepths.Rgba32 })
+                         && totalPixelSize <= 65536)
                 {
                     long rgba8Length;
                     long rgba32Length;
@@ -375,7 +397,11 @@ namespace Base64FileTypePlugin
             return bestBitDepth;
         }
 
-        protected override void OnSave(Document input, Stream output, SaveConfigToken token, Surface scratchSurface, ProgressEventHandler progressCallback)
+        protected override void OnSave(Document input,
+                                       Stream output,
+                                       SaveConfigToken token,
+                                       Surface scratchSurface,
+                                       ProgressEventHandler progressCallback)
         {
             Base64SaveConfigToken configToken = (Base64SaveConfigToken)token;
 
