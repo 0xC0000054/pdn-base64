@@ -41,7 +41,7 @@ namespace Base64FileTypePlugin
         }
 
         private static readonly string[] ImageFormats = new string[] { "bmp", "png", "jpeg", "gif" };
-        private static readonly string[] DataEndMarkers = new string[2] { "alt=\"", ")" };
+        private static readonly string[] DataEndMarkers = new string[] { "alt=\"" };
 
         private const string DataURIFormat = "data:image/{0};base64,";
 
@@ -75,9 +75,8 @@ namespace Base64FileTypePlugin
             {
                 string data = sr.ReadToEnd();
 
-                // The base 64 data can optionally be surrounded by single or double quotes.
-                bool isQuotedBase64String = false;
-                char quoteChar = '\0';
+                bool hasEndChar = false;
+                char endChar = '\0';
 
                 for (int i = 0; i < ImageFormats.Length; i++)
                 {
@@ -93,8 +92,16 @@ namespace Base64FileTypePlugin
 
                             if (startChar == '\'' || startChar == '"')
                             {
-                                isQuotedBase64String = true;
-                                quoteChar = startChar;
+                                // The base 64 data can optionally be surrounded by single or double quotes.
+                                hasEndChar = true;
+                                endChar = startChar;
+                            }
+                            else if (startChar == '(')
+                            {
+                                // In the CSS format the unquoted base 64 data is enclosed in
+                                // parentheses, e.g. url(<base64 data>)
+                                hasEndChar = true;
+                                endChar = ')';
                             }
                         }
 
@@ -103,9 +110,9 @@ namespace Base64FileTypePlugin
                     }
                 }
 
-                if (isQuotedBase64String)
+                if (hasEndChar)
                 {
-                    int endIndex = data.IndexOf(quoteChar);
+                    int endIndex = data.IndexOf(endChar);
 
                     if (endIndex >= 0)
                     {
