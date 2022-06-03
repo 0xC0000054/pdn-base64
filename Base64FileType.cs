@@ -67,6 +67,9 @@ namespace Base64FileTypePlugin
             {
                 string data = sr.ReadToEnd();
 
+                bool isQuotedBase64String = false;
+                char quoteChar = '\0';
+
                 for (int i = 0; i < ImageFormats.Length; i++)
                 {
                     string dataFormat = string.Format(CultureInfo.InvariantCulture, DataURIFormat, ImageFormats[i]);
@@ -75,23 +78,46 @@ namespace Base64FileTypePlugin
 
                     if (dataStartIndex >= 0)
                     {
+                        if (dataStartIndex > 0)
+                        {
+                            char startChar = data[dataStartIndex - 1];
+
+                            if (startChar == '\'' || startChar == '"')
+                            {
+                                isQuotedBase64String = true;
+                                quoteChar = startChar;
+                            }
+                        }
+
                         data = data.Remove(0, dataFormat.Length + dataStartIndex);
                         break;
                     }
                 }
 
-                for (int i = 0; i < EndEncodings.Length; i++)
+                if (isQuotedBase64String)
                 {
-                    int uriEndIndex = data.IndexOf(EndEncodings[i], StringComparison.OrdinalIgnoreCase);
-                    if (uriEndIndex >= 0)
-                    {
-                        if (uriEndIndex != data.Length)
-                        {
-                            // Remove any trailing characters.
-                            data = data.Remove(uriEndIndex, data.Length - uriEndIndex).TrimEnd();
-                        }
+                    int endIndex = data.IndexOf(quoteChar);
 
-                        break;
+                    if (endIndex >= 0)
+                    {
+                        data = data.Remove(endIndex, data.Length - endIndex).TrimEnd();
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < EndEncodings.Length; i++)
+                    {
+                        int uriEndIndex = data.IndexOf(EndEncodings[i], StringComparison.OrdinalIgnoreCase);
+                        if (uriEndIndex >= 0)
+                        {
+                            if (uriEndIndex != data.Length)
+                            {
+                                // Remove any trailing characters.
+                                data = data.Remove(uriEndIndex, data.Length - uriEndIndex).TrimEnd();
+                            }
+
+                            break;
+                        }
                     }
                 }
 
