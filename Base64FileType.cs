@@ -41,7 +41,13 @@ namespace Base64FileTypePlugin
         }
 
         private static readonly string[] ImageFormats = new string[] { "bmp", "png", "jpeg", "gif" };
-        private static readonly string[] DataEndMarkers = new string[] { "alt=\"" };
+
+        // The end markers for unquoted base64 data in a HTML img tag.
+        private static readonly string[] HtmlDataEndMarkers = new[]
+        {
+            " ", // The space separating the HTML tags: <img src=<base64 data> alt="..."/>
+            "/>", //The HTML end-of-tag marker: <img src=<base64 data>/>
+        };
 
         private const string DataURIFormat = "data:image/{0};base64,";
 
@@ -121,9 +127,9 @@ namespace Base64FileTypePlugin
                 }
                 else
                 {
-                    for (int i = 0; i < DataEndMarkers.Length; i++)
+                    for (int i = 0; i < HtmlDataEndMarkers.Length; i++)
                     {
-                        int uriEndIndex = data.IndexOf(DataEndMarkers[i], StringComparison.OrdinalIgnoreCase);
+                        int uriEndIndex = data.IndexOf(HtmlDataEndMarkers[i], StringComparison.OrdinalIgnoreCase);
                         if (uriEndIndex >= 0)
                         {
                             if (uriEndIndex != data.Length)
