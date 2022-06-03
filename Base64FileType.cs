@@ -41,7 +41,7 @@ namespace Base64FileTypePlugin
         }
 
         private static readonly string[] ImageFormats = new string[] { "bmp", "png", "jpeg", "gif" };
-        private static readonly string[] EndEncodings = new string[2] { "alt=\"", ")" };
+        private static readonly string[] DataEndMarkers = new string[2] { "alt=\"", ")" };
 
         private const string DataURIFormat = "data:image/{0};base64,";
 
@@ -114,9 +114,9 @@ namespace Base64FileTypePlugin
                 }
                 else
                 {
-                    for (int i = 0; i < EndEncodings.Length; i++)
+                    for (int i = 0; i < DataEndMarkers.Length; i++)
                     {
-                        int uriEndIndex = data.IndexOf(EndEncodings[i], StringComparison.OrdinalIgnoreCase);
+                        int uriEndIndex = data.IndexOf(DataEndMarkers[i], StringComparison.OrdinalIgnoreCase);
                         if (uriEndIndex >= 0)
                         {
                             if (uriEndIndex != data.Length)
