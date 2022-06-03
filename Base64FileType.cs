@@ -322,8 +322,8 @@ namespace Base64FileTypePlugin
                 long totalPixelSize = scratchSurface.Width * scratchSurface.Height;
                 if (allowedBitDepths.SetEquals(new SavableBitDepths[] { SavableBitDepths.Rgb8, SavableBitDepths.Rgb24 }) && totalPixelSize <= 65536)
                 {
-                    long rgb8Length = 0;
-                    long rgb24Length = 0;
+                    long rgb8Length;
+                    long rgb24Length;
 
                     try
                     {
@@ -339,8 +339,8 @@ namespace Base64FileTypePlugin
                 }
                 else if (allowedBitDepths.SetEquals(new SavableBitDepths[] { SavableBitDepths.Rgba8, SavableBitDepths.Rgba32 }) && totalPixelSize <= 65536)
                 {
-                    long rgba8Length = 0;
-                    long rgba32Length = 0;
+                    long rgba8Length;
+                    long rgba32Length;
 
                     try
                     {
