@@ -38,9 +38,9 @@ namespace Base64FileTypePlugin
             string body = !string.IsNullOrEmpty(this.className) ? this.className : "body";
 
             StringBuilder sb = new StringBuilder(body);
-            sb.Append("{ background:");
-
-            sb.AppendFormat(CultureInfo.InvariantCulture, "#{0} ", !string.IsNullOrEmpty(this.color) ? this.color : "ffffff");
+            sb.AppendFormat(CultureInfo.InvariantCulture,
+                            "{ background: #{0} ",
+                            !string.IsNullOrEmpty(this.color) ? this.color : "ffffff");
 
             string base64Format = string.Format(CultureInfo.InvariantCulture, Base64SaveConfigWidget.Base64ContentType, mimeType, base64);
             sb.AppendFormat(CultureInfo.InvariantCulture, "url({0}) ", base64Format);
