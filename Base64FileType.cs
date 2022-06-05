@@ -45,8 +45,8 @@ namespace Base64FileTypePlugin
         // The end markers for unquoted base64 data in a HTML img tag.
         private static readonly string[] HtmlDataEndMarkers = new[]
         {
-            " ", // The space separating the tag attributes: <img src=<base64 data> alt="..."/>
-            "/>", //The HTML end-of-tag marker: <img src=<base64 data>/>
+            " ", // The space separating the HTML tag attributes: <img src=<base64 data> alt="..."/>
+            "/>", // The HTML end-of-tag marker: <img src=<base64 data>/>
         };
 
         private const string DataURIFormat = "data:image/{0};base64,";
