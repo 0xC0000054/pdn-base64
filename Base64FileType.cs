@@ -34,11 +34,7 @@ namespace Base64FileTypePlugin
 {
     public sealed class Base64FileType : FileType
     {
-        public Base64FileType() : base("Base64",
-                                       FileTypeFlags.SupportsSaving | FileTypeFlags.SupportsLoading,
-                                       new string[] { ".b64" })
-        {
-        }
+        private const string DataURIFormat = "data:image/{0};base64,";
 
         private static readonly string[] ImageFormats = new string[] { "bmp", "png", "jpeg", "gif" };
 
@@ -49,7 +45,11 @@ namespace Base64FileTypePlugin
             "/>", // The HTML end-of-tag marker: <img src=<base64 data>/>
         };
 
-        private const string DataURIFormat = "data:image/{0};base64,";
+        public Base64FileType() : base("Base64",
+                                       FileTypeFlags.SupportsSaving | FileTypeFlags.SupportsLoading,
+                                       new string[] { ".b64" })
+        {
+        }
 
         private enum SavableBitDepths
         {
